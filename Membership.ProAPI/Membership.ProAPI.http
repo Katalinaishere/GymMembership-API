@@ -1,0 +1,6 @@
+@Membership.ProAPI_HostAddress = http://localhost:5149
+
+GET {{Membership.ProAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
