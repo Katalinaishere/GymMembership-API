@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp", "FitnessApp\FitnessApp.csproj", "{2ACB4331-8846-414E-87AE-87F939943FFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp", "FitnessApp\FitnessApp.csproj", "{2ACB4331-8846-414E-87AE-87F939943FFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Membership.ProAPI", "Membership.ProAPI\Membership.ProAPI.csproj", "{D4B25D20-9EC4-4632-A58A-2418A439E21C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membership.ProAPI", "Membership.ProAPI\Membership.ProAPI.csproj", "{D4B25D20-9EC4-4632-A58A-2418A439E21C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2ACB4331-8846-414E-87AE-87F939943FFF} = {2ACB4331-8846-414E-87AE-87F939943FFF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

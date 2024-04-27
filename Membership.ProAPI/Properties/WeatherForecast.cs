@@ -1,4 +1,4 @@
-namespace Membership.ProAPI
+namespace Membership.ProAPI.Properties
 {
     public class WeatherForecast
     {

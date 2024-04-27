@@ -1,4 +1,4 @@
-﻿namespace GymMembership.API.Dto
+﻿namespace Membership.ProAPI.Dto
 {
     public class PostMembershipDto
     {

@@ -1,3 +1,8 @@
+using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+using System;
+using Membership.ProAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//Connection string
+var connString = "Data Source=DESKTOP-1PD84L4\\SQLExpress;Initial Catalog=Database1;Integrated Security=True;Pooling=False;Encrypt=False;Trust Server Certificate=True";
+   builder.Services
+    .AddDbContext<Membership.Data.AppDbContext>(o => o.UseSqlServer(connString));
+
+//IServiceCollection serviceCollection = builder.Services.AddScoped<IMembersService, MemberService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

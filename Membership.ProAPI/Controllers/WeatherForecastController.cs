@@ -1,3 +1,4 @@
+using Membership.ProAPI.Properties;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymMembership.API.Controllers

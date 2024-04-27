@@ -1,21 +1,28 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Fitness.entities;
-var allMembers = new List<Members.Test.Members>()
+using FitnessApp.entities;
+using FitnessApp.Entities;
+using System.Collections.Generic;
+
+string fullName = "Emri Mbiemri";
+char gjinia = 'f';
+int mosha = 20;
+
+var allMembers = new List<Member.Test.Members>()
 {
-    new Members.Test.Members()
+    new Member.Test.Members()
     {
-        FirstName = "Member"
+        
     },
-    new Members.Test.Members()
+    new Member.Test.Members()
     {
-        FirstName = "Member second"
+        
     }
 };
 
 
-foreach (var member in allMembers)
+foreach (var student in allMembers)
 {
-    Console.WriteLine(Members.FirstName);
+    Console.WriteLine();
 }
 
 Console.ReadLine();
