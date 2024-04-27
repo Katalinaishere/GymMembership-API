@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fitness.entities
+namespace FitnessApp.entities
 {
     public class entitybase
     {

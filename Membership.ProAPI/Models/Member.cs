@@ -1,5 +1,5 @@
 ﻿
-namespace GymMembership.API.Models
+namespace Membership.ProAPI.Models
 {
     public class Member
     {
