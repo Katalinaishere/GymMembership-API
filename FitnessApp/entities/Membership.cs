@@ -8,7 +8,7 @@ namespace FitnessApp.entities
 {
     public class Membership : entitybase
     {
-        public string MembershipType { get; set; }
+        public string Membershiptype { get; set; }
         public int Duration { get; set; } // In months
         public decimal Price { get; set; }
 

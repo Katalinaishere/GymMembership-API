@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Membership.Data;
+using Membership.ProAPI.Dto;
 using Membership.ProAPI.Models;
 
 namespace Membership.ProAPI.Services
 {
-    public class MemberService
+    public class MemberService:IMembersService
     {
         private readonly AppDbContext _context;
 
@@ -50,6 +51,16 @@ namespace Membership.ProAPI.Services
                 _context.Members.Remove(memberToDelete);
                 _context.SaveChanges();
             }
+        }
+
+        public Member AddMember(PostMemberDto student)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Member UpdateStudent(PutMemberDto memberData, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Membership.ProAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GymMembership.API.Models.Member", b =>
+            modelBuilder.Entity("Membership.ProAPI.Models.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,10 +1,16 @@
-﻿using Membership.ProAPI.Models;
+﻿using Membership.ProAPI.Dto;
 
 namespace Membership.ProAPI.Services
 {
-        public interface IMembershipService
-        {
-            IEnumerable<Member> GetMemberships(); // Define a method to retrieve memberships
-        }
+    public interface IMembershipService
+    {
+        PutMembershipDto GetMembershipById(int id);
+        IEnumerable<PutMembershipDto> GetAllMemberships();
+        void CreateMembership(PutMembershipDto membership);
+        void UpdateMembership(int id, PutMembershipDto updatedMembership);
+        void DeleteMembership(int id);
+        object GetMemberships();
+
     }
+}
 

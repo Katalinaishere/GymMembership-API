@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Membership.ProAPI.Services;
+using Membership.ProAPI.Models;
+using Membership.ProAPI.Dto;
+using System.Linq;
 
 namespace Membership.ProAPI.Controllers
 {
@@ -14,7 +17,7 @@ namespace Membership.ProAPI.Controllers
             _service = service;
         }
 
-        // GET: api/Memberships/All
+        // GET: api/Membership/All
         [HttpGet("All")]
         public IActionResult GetMemberships()
         {
@@ -22,12 +25,11 @@ namespace Membership.ProAPI.Controllers
             return Ok(memberships);
         }
 
-        // GET: api/Memberships/GetById/{id}
+        // GET: api/Membership/GetById/{id}
         [HttpGet("GetById/{id}")]
         public IActionResult GetMembershipById(int id)
         {
-            var memberships = _service.GetMemberships();
-            var membership = memberships.FirstOrDefault(m => m.Id == id);
+            var membership = _service.GetMembershipById(id);
 
             if (membership == null)
             {
@@ -36,7 +38,38 @@ namespace Membership.ProAPI.Controllers
 
             return Ok(membership);
         }
+
+        // PUT: api/Membership/{id}
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] PutMembershipDto membershipDto)
+        {
+            var membership = _service.GetMembershipById(id);
+            if (membership == null)
+            {
+                return NotFound();
+            }
+
+            // Update membership properties
+            membership.Membershiptype = membershipDto.Membershiptype;
+            membership.Duration = membershipDto.Duration;
+            membership.Price = membershipDto.Price;
+
+            _service.UpdateMembership(id, membership);
+            return NoContent();
+        }
+
+        // DELETE: api/Membership/{id}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var membership = _service.GetMembershipById(id);
+            if (membership == null)
+            {
+                return NotFound();
+            }
+
+            _service.DeleteMembership(id);
+            return NoContent();
+        }
     }
 }
-
-

@@ -17,9 +17,13 @@ builder.Services.AddSwaggerGen();
 var connString = "Data Source=DESKTOP-1PD84L4\\SQLExpress;Initial Catalog=Database1;Integrated Security=True;Pooling=False;Encrypt=False;Trust Server Certificate=True";
    builder.Services
     .AddDbContext<Membership.Data.AppDbContext>(o => o.UseSqlServer(connString));
+IServiceCollection serviceCollection = builder.Services
+    .AddScoped<IMembersService, MemberService>()
+    .AddScoped<IMembershipService, MembershipService>(); // Register membership service
 
-//IServiceCollection serviceCollection = builder.Services.AddScoped<IMembersService, MemberService>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
