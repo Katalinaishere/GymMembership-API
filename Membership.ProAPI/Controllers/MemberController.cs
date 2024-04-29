@@ -54,4 +54,5 @@ namespace GymMembership.API.Controllers
             return Ok(newMember);
         }
     }
+
 }
