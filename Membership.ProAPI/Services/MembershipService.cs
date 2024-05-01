@@ -1,4 +1,4 @@
-﻿using Membership.Data;
+﻿using Membership.ProAPI;
 using Membership.ProAPI.Dto;
 using Membership.ProAPI.Models;
 
@@ -13,16 +13,6 @@ namespace Membership.ProAPI.Services
         private readonly List<MembershipService> _memberships; // Assuming in-memory storage
 
         public int Id { get; private set; }
-
-       /* public MembershipService(AppDbContext context)
-        {
-            // Initialize memberships (can be replaced with database calls)
-            _memberships = new List<PutMembershipDto>
-            {
-                new Membership { Id = 1, Type = "Basic", Duration = 30, Price = 50.00m },
-                new Membership { Id = 2, Type = "Premium", Duration = 60, Price = 100.00m }
-            };
-        }*/
 
         public IEnumerable<PutMembershipDto> GetAllMemberships()
         {
@@ -81,6 +71,16 @@ namespace Membership.ProAPI.Services
         }
 
         public PutMembershipDto GetMembershipById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object SearchMemberships(string membershipType, int? minDuration, int? maxDuration, decimal? minPrice, decimal? maxPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateMembership(Models.Membership membership)
         {
             throw new NotImplementedException();
         }

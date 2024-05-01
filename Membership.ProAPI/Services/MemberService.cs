@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Membership.Data;
+using Membership.ProAPI;
 using Membership.ProAPI.Dto;
 using Membership.ProAPI.Models;
 
+
 namespace Membership.ProAPI.Services
 {
-    public class MemberService:IMembersService
+    public class MemberService : IMembersService
     {
         private readonly AppDbContext _context;
 
@@ -23,10 +24,7 @@ namespace Membership.ProAPI.Services
         }
 
         // Method to retrieve a member by ID
-        public Member GetMemberById(int id)
-        {
-            return _context.Members.FirstOrDefault(m => m.Id == id);
-        }
+        public Member GetMemberById(int id) => _context.Members.FirstOrDefault(m => m.Id == id);
 
         // Method to add a new member
         public void AddMember(Member member)
@@ -35,11 +33,18 @@ namespace Membership.ProAPI.Services
             _context.SaveChanges();
         }
 
-        // Method to update an existing member
-        public void UpdateMember(Member member)
+
+        public Models.Member UpdateMember(PutMemberDto memberData, int id)
         {
-            _context.Members.Update(member);
+            var memberDb = _context.Members
+                .FirstOrDefault(n => n.Id == id);
+
+            memberDb.FullName = memberData.FullName;
+            _context.Members.Update(memberDb);
+
             _context.SaveChanges();
+
+            return memberDb;
         }
 
         // Method to delete a member by ID
@@ -51,14 +56,32 @@ namespace Membership.ProAPI.Services
                 _context.Members.Remove(memberToDelete);
                 _context.SaveChanges();
             }
-        }
-
-        public Member AddMember(PostMemberDto student)
+        } 
+    public Member AddMember(PostMemberDto student)
         {
             throw new NotImplementedException();
         }
 
         public Member UpdateStudent(PutMemberDto memberData, int id)
+        {
+            throw new NotImplementedException();
+        }
+        Member IMembersService.GetMemberById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Member IMembersService.AddMember(PostMemberDto student)
+        {
+            throw new NotImplementedException();
+        }
+
+        Member IMembersService.UpdateStudent(PutMemberDto memberData, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Member> GetMembers()
         {
             throw new NotImplementedException();
         }
