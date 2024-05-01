@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessApp.entities
+namespace FitnessApp
 {
-    public class Trainers: entitybase
+    public class Trainers : Entitybase
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
     }
 
-  
-   
+
+
 }

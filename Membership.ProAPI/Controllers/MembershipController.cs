@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Membership.ProAPI.Services;
-using Membership.ProAPI.Models;
 using Membership.ProAPI.Dto;
-using System.Linq;
+using MembershipModel = Membership.ProAPI.Models.Membership;
 
 namespace Membership.ProAPI.Controllers
 {
@@ -17,59 +16,146 @@ namespace Membership.ProAPI.Controllers
             _service = service;
         }
 
-        // GET: api/Membership/All
-        [HttpGet("All")]
-        public IActionResult GetMemberships()
+        [HttpPost]
+        public IActionResult CreateMembership([FromBody] PostMembershipDto membershipDto)
         {
-            var memberships = _service.GetMemberships();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var membership = new MembershipModel
+                {
+                    Membershiptype = membershipDto.Membershiptype,
+                    Duration = membershipDto.DurationInMonths,
+                    Price = membershipDto.Price,
+                    StartDate = membershipDto.StartDate,
+                    EndDate = (DateTime)membershipDto.EndDate
+                };
+
+                _service.CreateMembership(membership);
+
+                return CreatedAtAction(nameof(GetMembership), new { id = membership.Id }, membership);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        private object GetMembership()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("All")]
+        public IActionResult GetMemberships([FromQuery] int? minPrice, [FromQuery] int? maxPrice, [FromQuery] int? minDuration, [FromQuery] int? maxDuration)
+        {
+            var memberships = _service.GetAllMemberships();
+
+            // Apply filters
+            if (minPrice.HasValue)
+            {
+                memberships = memberships.Where(m => (int)m.Price >= minPrice);
+            }
+            if (maxPrice.HasValue)
+            {
+                memberships = memberships.Where(m => (int)m.Price <= maxPrice);
+            }
+            if (minDuration.HasValue)
+            {
+                memberships = memberships.Where(m => (int)m.Duration >= minDuration);
+            }
+            if (maxDuration.HasValue)
+            {
+                memberships = memberships.Where(m => (int)m.Duration <= maxDuration);
+            }
+
             return Ok(memberships);
         }
 
-        // GET: api/Membership/GetById/{id}
-        [HttpGet("GetById/{id}")]
-        public IActionResult GetMembershipById(int id)
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
-            var membership = _service.GetMembershipById(id);
-
-            if (membership == null)
+            try
             {
-                return NotFound();
+                var membership = _service.GetMembershipById(id);
+                if (membership == null)
+                {
+                    return NotFound();
+                }
+                return Ok(membership);
             }
-
-            return Ok(membership);
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // PUT: api/Membership/{id}
+        [HttpGet("search")]
+        public IActionResult SearchMemberships([FromQuery] string membershipType, [FromQuery] int? minDuration, [FromQuery] int? maxDuration, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice)
+        {
+            try
+            {
+                var memberships = _service.SearchMemberships(membershipType, minDuration, maxDuration, minPrice, maxPrice);
+                return Ok(memberships);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] PutMembershipDto membershipDto)
         {
-            var membership = _service.GetMembershipById(id);
-            if (membership == null)
+            try
             {
-                return NotFound();
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var membership = _service.GetMembershipById(id);
+                if (membership == null)
+                {
+                    return NotFound();
+                }
+
+                membership.Membershiptype = membershipDto.Membershiptype;
+                membership.Duration = membershipDto.Duration;
+                membership.Price = membershipDto.Price;
+
+                _service.UpdateMembership(id, membership);
+                return NoContent();
             }
-
-            // Update membership properties
-            membership.Membershiptype = membershipDto.Membershiptype;
-            membership.Duration = membershipDto.Duration;
-            membership.Price = membershipDto.Price;
-
-            _service.UpdateMembership(id, membership);
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // DELETE: api/Membership/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var membership = _service.GetMembershipById(id);
-            if (membership == null)
+            try
             {
-                return NotFound();
-            }
+                var membership = _service.GetMembershipById(id);
+                if (membership == null)
+                {
+                    return NotFound();
+                }
 
-            _service.DeleteMembership(id);
-            return NoContent();
+                _service.DeleteMembership(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

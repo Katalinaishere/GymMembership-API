@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessApp.entities
+namespace FitnessApp
 {
-    public class entitybase
+    public class Entitybase
     {
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }

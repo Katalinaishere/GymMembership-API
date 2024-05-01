@@ -10,7 +10,8 @@ namespace Membership.ProAPI.Services
         void UpdateMembership(int id, PutMembershipDto updatedMembership);
         void DeleteMembership(int id);
         object GetMemberships();
-
+        object SearchMemberships(string membershipType, int? minDuration, int? maxDuration, decimal? minPrice, decimal? maxPrice);
+        void CreateMembership(Models.Membership membership);
     }
 }
 

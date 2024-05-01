@@ -1,41 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using Membership.ProAPI.Models;
-using Membership.Data;
+using Membership.ProAPI.Dto;
+using Membership.ProAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using FitnessApp.Data;
+using Membership.ProAPI.Models;
 
-namespace GymMembership.API.Controllers
+namespace Membership.ProAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class MembersController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _service;
 
-        public MembersController(AppDbContext context)
+        public MembersController(AppDbContext service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/Members/All
         [HttpGet("All")]
         public IActionResult GetMembers()
         {
-            var allMembers = new List<Member>
-            {
-                new Member
-                {
-                    Id = 1,
-                    FullName = "member one",
-                    DOB = DateTime.Now.AddYears(-20)
-                },
-                new Member
-                {
-                    Id = 2,
-                    FullName = "member two",
-                    DOB = DateTime.Now.AddYears(-20)
-                }
-            };
+            var allMembers = _service.GetMembers();
 
             return Ok(allMembers);
         }
@@ -53,6 +42,14 @@ namespace GymMembership.API.Controllers
 
             return Ok(newMember);
         }
-    }
 
+        // POST: api/Members/AddNewMember
+        [HttpPost("AddNewMember")]
+        public IActionResult AddNewMember([FromBody] PostMemberDto payload)
+        {
+            var newMember = _service.AddMember(payload);
+
+            return Ok(newMember);
+        }
+    }
 }
