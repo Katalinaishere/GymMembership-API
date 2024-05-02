@@ -55,9 +55,9 @@ For the Jwt key property , I will be using a random string generator.
 The API uses JSON Web Tokens (JWT) for authentication. To access protected endpoints, obtain a JWT token by authenticating with valid credentials. Include the token in the `Authorization` header of your HTTP requests.
 
 ## Packages 
--Microsoft.EntityFrameworkCore
--Microsoft.EntityFrameworkCore.Tools
--Microsoft.EntityFramwwork.SqlServer
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.Tools
+- Microsoft.EntityFramwwork.SqlServer
 Package Regarding the Authentication and Authorization with JWT (Json Web Token)
 - Microsoft.AspNetCore.Authentication.JwtBearer 
 - Microsoft.IdentityModel.Tokens 
