@@ -5,7 +5,6 @@
 - **Membership Management**: Create, retrieve, update, and delete memberships with details such as type, price, duration, and benefits.
 - **Member Management**: Create, retrieve, update, and delete member profiles with details such as name, email, date of birth, and gender.
 - **Search and Filtering**: Search for memberships and members based on various criteria, such as membership type, price range, and duration.
-- **Authentication and Authorization**: Secure API endpoints with authentication and authorization mechanisms to protect sensitive data.
 - **Data Persistence**: Store membership and member data in a relational database for efficient data management.
 
 #Still in Progress :
