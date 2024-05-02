@@ -58,7 +58,7 @@ The API uses JSON Web Tokens (JWT) for authentication. To access protected endpo
 - Microsoft.EntityFrameworkCore
 - Microsoft.EntityFrameworkCore.Tools
 - Microsoft.EntityFramwwork.SqlServer
-Package Regarding the Authentication and Authorization with JWT (Json Web Token)
+
 - Microsoft.AspNetCore.Authentication.JwtBearer 
 - Microsoft.IdentityModel.Tokens 
 - System.IdentityModel.Tokens.Jwt 
